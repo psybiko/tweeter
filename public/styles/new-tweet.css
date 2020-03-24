@@ -26,11 +26,15 @@
 .form-output {
   display: flex;
   justify-content: space-between;
-  padding: 1rem 0 0;
+  padding: 1rem 0;
+  font-family: 'Bungee', cursive;
+}
+
+.red {
+  color: red;
 }
 
 .form-output button {
-  font-family: 'Bungee', cursive;
   font-size: 22px;
   color: #FFF;
   background-color: #4056A1;
