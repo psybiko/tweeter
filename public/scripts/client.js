@@ -4,6 +4,15 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 
+// Escaping text so that unsafe characters are converted into a safe "encoded" representation
+// This function protects against XSS
+const escape = (str) => {
+  let div = document.createElement('div');
+  div.appendChild(document.createTextNode(str));
+  return div.innerHTML;
+
+}
+
 
 // This function is responsible for returning a tweet article element containing the entire HTML structure of the tweet.
 const createTweetElement = function (tweet) {
@@ -12,6 +21,8 @@ const createTweetElement = function (tweet) {
     avatars,
     handle
   } = tweet.user;
+
+
   let markup = `
   <header>
     <div class="user">
@@ -21,7 +32,7 @@ const createTweetElement = function (tweet) {
     <p class="tweeter-handle">${handle}</p>
   </header>
     <div class="status">
-    <p>${tweet.content.text}</p>
+    <p>${escape(tweet.content.text)}</p>
     </div>
     <div class="line">
     <footer>
