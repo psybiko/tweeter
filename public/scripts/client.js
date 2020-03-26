@@ -78,10 +78,11 @@ $(document).ready(function () {
     if (formData.length === 5) {
       $('.alert-empty-error').show()
       
-    } else if (formData.length > 145) {
+    } else if (formData.length >= 145) {
       $('.alert-max-error').show()
+      event.stopPropogation()
     } else {
-      $('.alert-empty-error').hide()
+      // $('.alert-empty-error').hide()
       $('.alert-max-error').hide()
     }
 
