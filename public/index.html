@@ -67,11 +67,20 @@
       <form method="POST" action="/tweets/" enctype="application/x-www-form-urlencoded" class="ajax-form">
         <label for="tweet-text">What are you humming about?</label>
         <textarea name="text" id="tweet-text"></textarea>
-
+        
         <div class="form-output">
-          <!-- do something with button -->
           <button type="submit">Tweet</button>
           <output name="counter" class="counter" for="tweet-text">140</output>
+        </div>
+        
+        <!-- Display error message when condition isn't met -->
+        <div class="error alert-empty-error">
+          <i class="fas fa-exclamation-circle"></i>
+          Tweet cannot be empty!
+        </div>
+        <div class="error alert-max-error">
+          <i class="fas fa-exclamation-circle"></i>
+          Tweet exceeds maximum characters!
         </div>
       </form>
     </section>
