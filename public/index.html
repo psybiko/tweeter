@@ -45,19 +45,24 @@
   <!-- Top nav bar (fixed) -->
   <nav>
     <span>tweeter</span>
-    <p><strong>Write</strong> a new tweet</p>
-    <i class="fas fa-angle-double-down"></i>
+    <div class="nav-message">
+      <p><strong>Write</strong> a new tweet</p>
+      <i class="fas fa-angle-double-down"></i>
+    </div>
   </nav>
 
-  <header>
-    <div>
-      <img src="/images/profile-hex.png">
-    </div>
-    <br>
-    <div>
-      <h2>Your Name</h2>
-    </div>
-  </header>
+<div class="desktop">
+  <div class="c1">
+    <header>
+      <div>
+        <img src="/images/profile-hex.png">
+      </div>
+      <br>
+      <div>
+        <h2>KC Kai</h2>
+      </div>
+    </header>
+  </div>
 
 
   <!-- Page-specific (main) content here -->
@@ -67,12 +72,12 @@
       <form method="POST" action="/tweets/" enctype="application/x-www-form-urlencoded" class="ajax-form">
         <label for="tweet-text">What are you humming about?</label>
         <textarea name="text" id="tweet-text"></textarea>
-        
+
         <div class="form-output">
           <button type="submit">Tweet</button>
           <output name="counter" class="counter" for="tweet-text">140</output>
         </div>
-        
+
         <!-- Display error message when condition isn't met -->
         <div class="error alert-empty-error">
           <i class="fas fa-exclamation-circle"></i>
@@ -87,11 +92,10 @@
 
     <section class="tweet-container">
     </section>
-
-    <footer class="temp">
-      <div></div>
-    </footer>
   </main>
+
+</div>
+
 </body>
 
 </html>
