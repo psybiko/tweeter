@@ -69,7 +69,7 @@ $(document).ready(function () {
     } else if (formData.length > 145) {
       alert('Tweet exceeds maximum characters')
     } 
-    
+
     $.ajax({
         url: '/tweets',
         type: 'POST',
@@ -93,7 +93,8 @@ $(document).ready(function () {
         dataType: "JSON"
       })
       .then((response) => {
-        renderTweets(response)
+        console.log(response)
+        renderTweets(response.reverse())
       })
   }
 
