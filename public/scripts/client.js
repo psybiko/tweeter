@@ -34,55 +34,68 @@ const createTweetElement = function (tweet) {
     </footer>
     
     `
-    let $tweet = $('<article>').addClass('tweet');
-    let tweetCard = $tweet.append(markup);
-    return tweetCard;
-  }
-  
-  const renderTweets = (tweets) => {
-    // loop through tweets
-    // calls createTweetElement for each tweet
-    // takes return value and appends it the the tweet container
-    // let posted = $('.tweet-container').append(tweets);
-    for (let tweet of tweets) {
-      let $tweet = createTweetElement(tweet)
-      let posts = $('.tweet-container').append($tweet);
-      return posts
-    }
-  }
+  let $tweet = $('<article>').addClass('tweet');
+  let tweetCard = $tweet.append(markup);
+  return tweetCard;
+}
 
-  $(document).ready(function () {
+const renderTweets = (tweets) => {
+  // loop through tweets
+  // calls createTweetElement for each tweet
+  // takes return value and appends it the the tweet container
+  // let posted = $('.tweet-container').append(tweets);
+  const arr = []
+  for (let tweet of tweets) {
+    arr.push(createTweetElement(tweet))
+
+  }
+  let posts = $('.tweet-container').append(arr);
+  return posts
+}
+
+$(document).ready(function () {
 
   // prevent default post request on submitting
-  const form = $('.ajax-form')
-  $(form).submit((event) => {
-    console.log('Triggered')
+
+  // We'll enhance the form submit handler to disallow form submission in the 
+  // event that the tweet area is empty, or exceeds the 140 character limit.
+
+  $(".ajax-form").submit((event) => {
     event.preventDefault();
+    const formData = ($(".ajax-form").serialize())
 
-    const formData = ($(form).serialize())
-
+    if (formData.length === 5) {
+      alert('Tweet cannot be empty')
+    } else if (formData.length > 145) {
+      alert('Tweet exceeds maximum characters')
+    } 
+    
     $.ajax({
-      url: $(form).attr('action'),
-      type: 'POST',
-      data: formData,
-    })
+        url: '/tweets',
+        type: 'POST',
+        data: formData,
+      })
+      .then(() => {
+        loadTweets()
+
+      })
   })
+
+ 
 
   // Fetches data from db and renders the tweet
   const loadTweets = () => {
-    const $button = $('button');
-    $button.click(() => {
-      $.ajax({
-          url: $(form).attr('action'),
-          type: 'GET',
-          dataType: "JSON"
-        })
-        .then((response) => {
-          renderTweets(response)
-        })
-    })
+    // const $button = $('button');
+    // $button.click(() => {
+    $.ajax({
+        url: '/tweets',
+        type: 'GET',
+        dataType: "JSON"
+      })
+      .then((response) => {
+        renderTweets(response)
+      })
   }
 
-  loadTweets()
 
 })
