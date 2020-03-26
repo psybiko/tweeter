@@ -76,10 +76,14 @@ $(document).ready(function () {
     const formData = ($(".ajax-form").serialize())
 
     if (formData.length === 5) {
-      alert('Tweet cannot be empty')
+      $('.alert-empty-error').show()
+      
     } else if (formData.length > 145) {
-      alert('Tweet exceeds maximum characters')
-    } 
+      $('.alert-max-error').show()
+    } else {
+      $('.alert-empty-error').hide()
+      $('.alert-max-error').hide()
+    }
 
     $.ajax({
         url: '/tweets',
