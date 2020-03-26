@@ -13,7 +13,6 @@ const escape = (str) => {
 
 }
 
-
 // This function is responsible for returning a tweet article element containing the entire HTML structure of the tweet.
 const createTweetElement = function (tweet) {
   const {
@@ -60,24 +59,45 @@ const renderTweets = (tweets) => {
     arr.push(createTweetElement(tweet))
 
   }
-  let posts = $('.tweet-container').append(arr);
+  let posts = $('.tweet-container').html(arr);
+  console.log('posts',posts)
   return posts
 }
 
+
+
+
 $(document).ready(function () {
 
+  $('.nav-btn').click(() => {
+    $('.new-tweet').slideDown()
+  })
+  
+  // Fetches data from db and renders the tweet
+  const loadTweets = () => {
+    // const $button = $('button');
+    // $button.click(() => {
+    $.ajax({
+      url: '/tweets',
+        type: 'GET',
+        dataType: "JSON"
+      })
+      .then((response) => {
+        console.log('response',response)
+        renderTweets(response.reverse())
+      })
+    }
+
+    loadTweets()
+    
   // prevent default post request on submitting
-
-  // We'll enhance the form submit handler to disallow form submission in the 
-  // event that the tweet area is empty, or exceeds the 140 character limit.
-
   $(".ajax-form").submit((event) => {
     event.preventDefault();
     const formData = ($(".ajax-form").serialize())
 
     if (formData.length === 5) {
       $('.alert-empty-error').show()
-      
+
     } else if (formData.length >= 145) {
       $('.alert-max-error').show()
       event.stopPropogation()
@@ -95,24 +115,7 @@ $(document).ready(function () {
         loadTweets()
 
       })
-  })
-
- 
-
-  // Fetches data from db and renders the tweet
-  const loadTweets = () => {
-    // const $button = $('button');
-    // $button.click(() => {
-    $.ajax({
-        url: '/tweets',
-        type: 'GET',
-        dataType: "JSON"
-      })
-      .then((response) => {
-        console.log(response)
-        renderTweets(response.reverse())
-      })
-  }
+    })
 
 
 })

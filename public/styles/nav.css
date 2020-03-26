@@ -19,8 +19,14 @@ nav {
   align-items: center;
 }
 
+.nav-btn {
+  background-color: inherit;
+  border: none;
+}
+
 .nav-message p {
   margin: 9px 0 6px 0;
+  color: #FFF;
 }
 
 .fa-angle-double-down {
