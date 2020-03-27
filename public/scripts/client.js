@@ -11,10 +11,10 @@ const escape = (str) => {
   div.appendChild(document.createTextNode(str));
   return div.innerHTML;
 
-}
+};
 
 // This function is responsible for returning a tweet article element containing the entire HTML structure of the tweet.
-const createTweetElement = function (tweet) {
+const createTweetElement = function(tweet) {
   const {
     name,
     avatars,
@@ -43,35 +43,35 @@ const createTweetElement = function (tweet) {
     </div>
     </footer>
     
-    `
+    `;
   let $tweet = $('<article>').addClass('tweet');
   let tweetCard = $tweet.append(markup);
   return tweetCard;
-}
+};
 
 const renderTweets = (tweets) => {
   // loop through tweets
   // calls createTweetElement for each tweet
   // takes return value and appends it the the tweet container
   // let posted = $('.tweet-container').append(tweets);
-  const arr = []
+  const arr = [];
   for (let tweet of tweets) {
-    arr.push(createTweetElement(tweet))
+    arr.push(createTweetElement(tweet));
 
   }
   let posts = $('.tweet-container').html(arr);
-  console.log('posts', posts)
-  return posts
-}
+  console.log('posts', posts);
+  return posts;
+};
 
 
 
 
-$(document).ready(function () {
+$(document).ready(function() {
 
   $('.nav-btn').click(() => {
-    $('.new-tweet').toggle("200")
-  })
+    $('.new-tweet').toggle("200");
+  });
 
 
   // Fetches data from db and renders the tweet
@@ -79,44 +79,44 @@ $(document).ready(function () {
     // const $button = $('button');
     // $button.click(() => {
     $.ajax({
-        url: '/tweets',
-        type: 'GET',
-        dataType: "JSON"
-      })
+      url: '/tweets',
+      type: 'GET',
+      dataType: "JSON"
+    })
       .then((response) => {
-        console.log('response', response)
-        renderTweets(response.reverse())
-      })
-  }
+        console.log('response', response);
+        renderTweets(response.reverse());
+      });
+  };
 
-  loadTweets()
+  loadTweets();
 
   // prevent default post request on submitting
   $(".ajax-form").submit((event) => {
     event.preventDefault();
-    const formData = ($(".ajax-form").serialize())
+    const formData = ($(".ajax-form").serialize());
 
     if (formData.length === 5) {
-      $('.alert-empty-error').show()
+      $('.alert-empty-error').show();
 
     } else if (formData.length >= 145) {
-      $('.alert-max-error').show()
-      event.stopPropogation()
+      $('.alert-max-error').show();
+      event.stopPropogation();
     } else {
       // $('.alert-empty-error').hide()
-      $('.alert-max-error').hide()
+      $('.alert-max-error').hide();
     }
 
     $.ajax({
-        url: '/tweets',
-        type: 'POST',
-        data: formData,
-      })
+      url: '/tweets',
+      type: 'POST',
+      data: formData,
+    })
       .then(() => {
-        loadTweets()
+        loadTweets();
 
-      })
-  })
+      });
+  });
 
   // scroll to top code from stack overflow
   $('.fixed-scroll-btn').hide();
@@ -134,6 +134,6 @@ $(document).ready(function () {
     $('html, body').animate({
       scrollTop: '0px'
     }, 300);
-  })
+  });
 
-})
+});
