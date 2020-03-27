@@ -81,46 +81,49 @@ article:hover .tweeter-handle {
     background-color: #f09918;
     background-image: url(http://www.transparenttextures.com/patterns/asfalt-light.png);
   }
-  
+
   .fixed-scroll-btn {
-    display: none;
+    opacity: 0;
   }
 }
 
 /* Desktop Styles */
 @media only screen and (min-width: 1024px) {
-  
+
   nav {
     background-color: #4056A1;
     background-image: none;
   }
-  
+
   .desktop {
     display: flex;
     justify-content: space-between;
     margin: 3rem 1.5rem;
   }
-  
+
   .c1 {
     width: 25%;
   }
-  
+
   .container {
     margin-top: 120px;
     width: 60%;
     /* margin: 0; */
   }
-  
+
   .fixed-scroll-btn {
-    display: block;
+    opacity: 1;
     position: fixed;
     bottom: 2em;
     right: 3em;
     padding: 20px 26px;
-    background-color: red;
+    /* background-color: red; */
+    background: rgb(219, 154, 198);
+    background: linear-gradient(135deg, rgba(219, 154, 198, 0.772163968126313) 10%, rgba(175, 151, 199, 0.7637606067817753) 46%, rgba(138, 162, 205, 0.7497550045408788) 74%);
     border-radius: 50%;
     border: none;
     color: #ffffff;
+    outline: none;
   }
 
 }

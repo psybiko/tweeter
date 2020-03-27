@@ -8,7 +8,6 @@ nav {
   height: 120px;
   width: 100%;
   z-index: 2;
-  background-color: #4056A1;
   padding: 0 1.5em;
 }
 
@@ -22,7 +21,9 @@ nav {
 .nav-btn {
   background-color: inherit;
   border: none;
+  outline: none;
 }
+
 
 .nav-message p {
   margin: 9px 0 6px 0;
@@ -41,6 +42,7 @@ nav {
   0% {
     bottom: 8%;
   }
+
   50% {
     bottom: 13%;
   }
