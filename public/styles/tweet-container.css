@@ -117,13 +117,27 @@ article:hover .tweeter-handle {
     bottom: 2em;
     right: 3em;
     padding: 20px 26px;
-    /* background-color: red; */
-    background: rgb(219, 154, 198);
-    background: linear-gradient(135deg, rgba(219, 154, 198, 0.772163968126313) 10%, rgba(175, 151, 199, 0.7637606067817753) 46%, rgba(138, 162, 205, 0.7497550045408788) 74%);
-    border-radius: 50%;
-    border: none;
     color: #ffffff;
     outline: none;
+
+    background: rgb(219, 154, 198);
+    background: linear-gradient(135deg, rgba(219, 154, 198, 1) 10%, rgba(175, 151, 199, 1) 46%, rgba(138, 162, 205, 1) 74%);
+    border-radius: 50%;
+    border: none;
+    box-shadow: 1px 1px 4px darkgray;
   }
+
+  .fixed-scroll-btn:hover {
+    background: rgb(191, 139, 174);
+    background: linear-gradient(135deg, rgba(191, 139, 174, 1) 10%, rgba(146, 125, 166, 1) 46%, rgba(114, 133, 168, 1) 74%);
+    cursor: pointer;
+    
+  }
+
+  .fixed-scroll-btn:active {
+    box-shadow: 2px 2px 4px #666;
+    transform: translateY(3px);
+  }
+
 
 }
