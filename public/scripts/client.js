@@ -60,7 +60,7 @@ const renderTweets = (tweets) => {
 
   }
   let posts = $('.tweet-container').html(arr);
-  console.log('posts',posts)
+  console.log('posts', posts)
   return posts
 }
 
@@ -70,26 +70,27 @@ const renderTweets = (tweets) => {
 $(document).ready(function () {
 
   $('.nav-btn').click(() => {
-    $('.new-tweet').slideDown()
+    $('.new-tweet').toggle("200")
   })
-  
+
+
   // Fetches data from db and renders the tweet
   const loadTweets = () => {
     // const $button = $('button');
     // $button.click(() => {
     $.ajax({
-      url: '/tweets',
+        url: '/tweets',
         type: 'GET',
         dataType: "JSON"
       })
       .then((response) => {
-        console.log('response',response)
+        console.log('response', response)
         renderTweets(response.reverse())
       })
-    }
+  }
 
-    loadTweets()
-    
+  loadTweets()
+
   // prevent default post request on submitting
   $(".ajax-form").submit((event) => {
     event.preventDefault();
@@ -115,7 +116,24 @@ $(document).ready(function () {
         loadTweets()
 
       })
-    })
+  })
 
+  // scroll to top code from stack overflow
+  $('.fixed-scroll-btn').hide();
+  //Check to see if the window is top if not then display button
+  $(window).scroll(() => {
+    if ($(this).scrollTop() > 100) {
+      $('.fixed-scroll-btn').fadeIn().show('slow');
+    } else {
+      $('.fixed-scroll-btn').fadeOut().hide('slow');
+    }
+  });
+
+
+  $('.fixed-scroll-btn').click(() => {
+    $('html, body').animate({
+      scrollTop: '0px'
+    }, 300);
+  })
 
 })
