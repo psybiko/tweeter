@@ -13,14 +13,16 @@ const escape = (str) => {
 
 };
 
+let d = new Date();
+let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
 // This function is responsible for returning a tweet article element containing the entire HTML structure of the tweet.
-const createTweetElement = function(tweet) {
+const createTweetElement = function (tweet) {
   const {
     name,
     avatars,
     handle
   } = tweet.user;
-
 
   let markup = `
   <header>
@@ -35,7 +37,7 @@ const createTweetElement = function(tweet) {
     </div>
     <div class="line">
     <footer>
-    <p>10 days ago</p>
+    <p>${days[d.getDay()]}</p>
     <div class="tweet-buttons">
     <i class="fab fa-font-awesome-flag"></i>
     <i class="fas fa-retweet"></i>
@@ -67,7 +69,7 @@ const renderTweets = (tweets) => {
 
 
 
-$(document).ready(function() {
+$(document).ready(function () {
 
   $('.nav-btn').click(() => {
     $('.new-tweet').toggle("200");
@@ -76,13 +78,11 @@ $(document).ready(function() {
 
   // Fetches data from db and renders the tweet
   const loadTweets = () => {
-    // const $button = $('button');
-    // $button.click(() => {
     $.ajax({
-      url: '/tweets',
-      type: 'GET',
-      dataType: "JSON"
-    })
+        url: '/tweets',
+        type: 'GET',
+        dataType: "JSON"
+      })
       .then((response) => {
         console.log('response', response);
         renderTweets(response.reverse());
@@ -95,27 +95,26 @@ $(document).ready(function() {
   $(".ajax-form").submit((event) => {
     event.preventDefault();
     const formData = ($(".ajax-form").serialize());
-
+    $("#tweet-text").val("");
+    
     if (formData.length === 5) {
-      $('.alert-empty-error').show();
-
+      $('.alert-empty-error').show().delay(3000).fadeOut();
     } else if (formData.length >= 145) {
-      $('.alert-max-error').show();
+      $('.alert-max-error').show().delay(3000).fadeOut();
       event.stopPropogation();
     } else {
-      // $('.alert-empty-error').hide()
       $('.alert-max-error').hide();
     }
 
     $.ajax({
-      url: '/tweets',
-      type: 'POST',
-      data: formData,
-    })
+        url: '/tweets',
+        type: 'POST',
+        data: formData,
+      })
       .then(() => {
         loadTweets();
-
       });
+
   });
 
   // scroll to top code from stack overflow
@@ -135,5 +134,7 @@ $(document).ready(function() {
       scrollTop: '0px'
     }, 300);
   });
+
+
 
 });
