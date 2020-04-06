@@ -41,6 +41,10 @@ article:hover .tweeter-handle {
   display: block;
 }
 
+.status {
+  word-wrap: break-word;
+}
+
 
 .alert-empty-error {
   display: none;

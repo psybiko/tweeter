@@ -99,7 +99,7 @@ $(document).ready(function () {
     
     if (formData.length === 5) {
       $('.alert-empty-error').show().delay(3000).fadeOut();
-    } else if (formData.length >= 145) {
+    } else if (formData.length > 145) {
       $('.alert-max-error').show().delay(3000).fadeOut();
       event.stopPropogation();
     } else {
