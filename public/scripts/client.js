@@ -100,8 +100,8 @@ $(document).ready(function () {
     if (formData.length === 5) {
       $('.alert-empty-error').show().delay(3000).fadeOut();
     } else if (formData.length > 145) {
+      event.stopPropogration()
       $('.alert-max-error').show().delay(3000).fadeOut();
-      event.stopPropogation();
     } else {
       $('.alert-max-error').hide();
     }

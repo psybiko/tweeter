@@ -5,6 +5,7 @@ $(document).ready(function() {
   $('#tweet-text').on('keyup', function() {
     let count = 140;
     let num = $(this).val().length
+    console.log(num)
     
     if (num) {
       count = count - num
@@ -21,6 +22,7 @@ $(document).ready(function() {
     $(this).siblings()[1].children[1].innerHTML = count
     
   })
+
 
 });
 
