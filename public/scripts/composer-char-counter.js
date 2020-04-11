@@ -6,10 +6,10 @@ $(document).ready(function() {
     let count = 140;
     let num = $(this).val().length
     console.log(num)
-    
+
     if (num) {
       count = count - num
-    } 
+    }
 
     if (count < 0) {
       // adds a class of red to counter
@@ -20,9 +20,8 @@ $(document).ready(function() {
     }
 
     $(this).siblings()[1].children[1].innerHTML = count
-    
+
   })
 
 
 });
-

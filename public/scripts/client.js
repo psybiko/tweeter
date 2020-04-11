@@ -44,7 +44,7 @@ const createTweetElement = function (tweet) {
     <i class="fas fa-heart"></i>
     </div>
     </footer>
-    
+
     `;
   let $tweet = $('<article>').addClass('tweet');
   let tweetCard = $tweet.append(markup);
@@ -55,14 +55,12 @@ const renderTweets = (tweets) => {
   // loop through tweets
   // calls createTweetElement for each tweet
   // takes return value and appends it the the tweet container
-  // let posted = $('.tweet-container').append(tweets);
   const arr = [];
   for (let tweet of tweets) {
     arr.push(createTweetElement(tweet));
 
   }
   let posts = $('.tweet-container').html(arr);
-  console.log('posts', posts);
   return posts;
 };
 
@@ -73,6 +71,7 @@ $(document).ready(function () {
 
   $('.nav-btn').click(() => {
     $('.new-tweet').toggle("200");
+    $('#tweet-text').focus();
   });
 
 
@@ -84,7 +83,6 @@ $(document).ready(function () {
         dataType: "JSON"
       })
       .then((response) => {
-        console.log('response', response);
         renderTweets(response.reverse());
       });
   };
@@ -95,17 +93,19 @@ $(document).ready(function () {
   $(".ajax-form").submit((event) => {
     event.preventDefault();
     const formData = ($(".ajax-form").serialize());
-    $("#tweet-text").val("");
-    
+
+
     if (formData.length === 5) {
       $('.alert-empty-error').show().delay(3000).fadeOut();
     } else if (formData.length > 145) {
       $('.alert-max-error').show().delay(3000).fadeOut();
-      $('.counter').text('140').removeClass('red')
-      event.stopPropogration()
+      // $('.counter').text('140').removeClass('red')
+      return false
     } else {
+      $("#tweet-text").val("");
       $('.alert-max-error').hide();
     }
+
 
     $.ajax({
         url: '/tweets',
@@ -135,6 +135,7 @@ $(document).ready(function () {
       scrollTop: '0px'
     }, 300);
   });
+
 
 
 
